@@ -6,6 +6,14 @@ import session from 'express-session';
 import * as bodyParser from 'body-parser';
 import { addRouter } from './api/add/AddRouter'
 import { searchRouter } from './api/search/SearchRouter'
+const dotenv = require('dotenv');
+const path = require('path')
+
+    const result = dotenv.config({ path: require('find-config')('.env') });
+
+    if (result.error) {
+        console.error("Error dotenv config", result.error)
+    }
 
 class BackendServer extends Server {
 
@@ -18,7 +26,6 @@ class BackendServer extends Server {
         this.app.use(bodyParser.json())
         this.app.use(bodyParser.urlencoded({ extended: true }))
         this.app.use(session({ secret: 'S3CRE7', resave: true, saveUninitialized: true }));
-        require('dotenv').config();
 
         this.app.use(helmet())
         this.app.use(cors())
@@ -29,6 +36,10 @@ class BackendServer extends Server {
     }
 
     public start(port: string): void {
+
+        this.app.get("/", (req: express.Request, res: express.Response) => {
+            res.status(200).send('Welcome to the Image Repository. Take a look at the README.md for more information for accessing these endpoints!');
+        });
 
         this.app.get('/hello-world', (req: express.Request, res: express.Response) => {
             res.status(200).send('Hello, World');
