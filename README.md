@@ -3,13 +3,16 @@
 
 Application Hosted here for use:
 
+Client: https://cra-cloud-run-h4yniygn3a-uc.a.run.app/
+
+Server: https://image-repository-288412.uc.r.appspot.com/
 
 This application consists of two parts. The server (ImgRepository) and a rudimentary client (img-frontend) to demo the capabilities of the server.
 
 The entire application is written in TypeScript. The server is written in Node and the client in React.
 
 The application is built is on top of GCP. Namely,
-- The backend and frontend are both deployed on individual domains on the GCP App Engine. 
+- The backend is deployed on the GCP App Engine and the frontend is deployed as a container on Cloud Run. 
 - I use GCP Cloud Storage Buckets to store the photos, and 
 - Cloud Firestore to store references to them. 
 - I used the GCP Vision API to tag them for objects, which are then used for searching.
@@ -71,6 +74,30 @@ This application is pretty rudimentary but it was an interesting and enjoyable e
 - Ability to delete photos
 - Better searching that is not only tag based on objects in the image
 - Clean up frontend styling to make it more user intuitive (though a bit outside the scope of a backend challenge)
+
+### Server Endpoint Documentation
+
+**Adding**
+
+Single File: POST Request to `add/` with Formdata of the form (key="image",  value=files)
+
+Multiple Files: POST Request to `add/bulk` with Formdata of the form (key="image",  value=files)
+
+Both of these endpoints take the optional `private` query param where `private=true` or `private=false`. If query param is not specified the server will default to a public upload. 
+
+**Searching**
+
+Public Searching: GET Request to `/search/public` with an optional `tags` query parameter, where multiple tags can be passed through seperated by a comma. Like this:
+
+```
+/search/public/?tags=<tag1>,<tag2>,<tag3>
+```
+
+Private searching: GET Request to `/search/private` with tags passed in the same way as in public. The accesstoken to access the associated private images must be passed as an `Authorization` header in the request headers as a Bearer Token.
+
+
+
+
 
 
 
