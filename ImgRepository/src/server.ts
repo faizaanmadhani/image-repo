@@ -6,14 +6,6 @@ import session from 'express-session';
 import * as bodyParser from 'body-parser';
 import { addRouter } from './api/add/AddRouter'
 import { searchRouter } from './api/search/SearchRouter'
-const dotenv = require('dotenv');
-const path = require('path')
-
-    const result = dotenv.config({ path: require('find-config')('.env') });
-
-    if (result.error) {
-        console.error("Error dotenv config", result.error)
-    }
 
 class BackendServer extends Server {
 
