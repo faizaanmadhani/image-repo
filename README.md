@@ -19,7 +19,7 @@ The application is built is on top of GCP. Namely,
 
 ## Features
 
-- A user is able to **SEARCH** and **ADD** images to the repository.
+- A user is able to **ADD** images to the repository, and **SEARCH** through them
 
 **ADDING**
 
