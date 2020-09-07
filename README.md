@@ -23,7 +23,7 @@ The application is built is on top of GCP. Namely,
 
 **ADDING**
 
-- Bulk Uploading for an enormous amount of images
+- Bulk Uploading for multiple images (Currently limited to 5 to prevent malicious attacks but can be increased to take an unlimited amount)
 - Public and Private storage (a user can upload an image privately and receive a key for it)
 - File type validation for images to prevent malicious files
 - File size validation to prevent attacks from files that are too large
